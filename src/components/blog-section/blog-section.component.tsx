@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import type { BlogPost } from '../../data/portfolio.types';
-import { blog } from '../../data/portfolio.data';
+import { usePortfolioData } from '../../store/portfolio/use-portfolio';
+import { useUI } from '../../store/ui/use-ui';
 import BlogComingSoonModal from '../blog-coming-soon-modal/blog-coming-soon-modal.component';
 import {
   blogSection,
@@ -25,7 +25,8 @@ import {
 } from './blog-section.css';
 
 const BlogSection = () => {
-  const [showModal, setShowModal] = useState(false);
+  const { blog, blogPosts, upcomingTopics } = usePortfolioData();
+  const { isBlogModalOpen, openModal, closeModal } = useUI();
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -36,14 +37,22 @@ const BlogSection = () => {
     });
   };
 
+  const handleShowModal = () => {
+    openModal('blogComingSoon');
+  };
+
+  const handleCloseModal = () => {
+    closeModal('blogComingSoon');
+  };
+
   return (
     <section id="blog" className={blogSection}>
       <h2 className={blogTitle}>{blog.title}</h2>
       <div className={blogContainer}>
         <div>
-          {blog.posts.length > 0 ? (
+          {blogPosts.length > 0 ? (
             <div className={blogPostsGrid}>
-              {blog.posts.map((post: BlogPost) => (
+              {blogPosts.map((post: BlogPost) => (
                 <a
                   key={post.id}
                   href={post.url}
@@ -80,11 +89,11 @@ const BlogSection = () => {
               </p>
             </div>
           )}
-          {blog.upcomingTopics.length > 0 && (
+          {upcomingTopics.length > 0 && (
             <div className={blogToggleContainer}>
               <button
                 className={blogToggleButton}
-                onClick={() => setShowModal(true)}
+                onClick={handleShowModal}
               >
                 View Coming Soon Topics
               </button>
@@ -94,11 +103,11 @@ const BlogSection = () => {
       </div>
 
       <BlogComingSoonModal
-        isOpen={showModal}
-        onClose={() => setShowModal(false)}
+        isOpen={isBlogModalOpen}
+        onClose={handleCloseModal}
         title="Coming Soon Topics 📝"
         description={blog.description}
-        upcomingTopics={blog.upcomingTopics}
+        upcomingTopics={upcomingTopics}
         comingSoonMessage={blog.comingSoonMessage}
       />
     </section>

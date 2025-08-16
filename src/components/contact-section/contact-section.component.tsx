@@ -1,4 +1,4 @@
-import { personalInfo } from '../../data/portfolio.data';
+import { usePortfolioData } from '../../store/portfolio/use-portfolio';
 import {
   contactSection,
   contactTitle,
@@ -9,6 +9,8 @@ import {
 } from './contact-section.css';
 
 const ContactSection = () => {
+  const { personalInfo } = usePortfolioData();
+
   return (
     <section id="contact" className={contactSection}>
       <h2 className={contactTitle}>Get in Touch</h2>

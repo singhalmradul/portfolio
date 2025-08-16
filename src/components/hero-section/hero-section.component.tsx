@@ -1,12 +1,12 @@
-import { personalInfo } from '../../data/portfolio.data';
+import { usePortfolioData } from '../../store/portfolio/use-portfolio';
 import { heroSection, heroTitle, heroDescription, heroButtons, heroButton, heroButtonSecondary } from './hero-section.css';
 
 const HeroSection = () => {
+  const { personalInfo } = usePortfolioData();
+
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    projectsSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (

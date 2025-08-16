@@ -1,4 +1,4 @@
-import { skills } from '../../data/portfolio.data';
+import { usePortfolioData } from '../../store/portfolio/use-portfolio';
 import {
   skillsSection,
   skillsTitle,
@@ -10,6 +10,8 @@ import {
 } from './skills-section.css';
 
 const SkillsSection = () => {
+  const { skills } = usePortfolioData();
+
   const skillCategories = [
     { title: 'Backend', skills: skills.backend },
     { title: 'Cloud & DevOps', skills: skills.cloud },
@@ -26,7 +28,7 @@ const SkillsSection = () => {
           <div key={category.title} className={skillsCategory}>
             <h3 className={skillsCategoryTitle}>{category.title}</h3>
             <div className={skillsGrid}>
-              {category.skills.map((skill) => (
+              {category.skills.map((skill: string) => (
                 <div key={skill} className={skillCard}>
                   {skill}
                 </div>

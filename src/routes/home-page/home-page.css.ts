@@ -8,7 +8,7 @@ export const homeContainer = style({
   margin: '0 auto',
 
   '@media': {
-    [mediaQueries.below.tablet]: {
+    [mediaQueries.sm]: {
       padding: theme.spacing.md,
     },
   },
@@ -22,7 +22,7 @@ export const homeTitle = style({
   textAlign: 'center',
 
   '@media': {
-    [mediaQueries.below.tablet]: {
+    [mediaQueries.sm]: {
       fontSize: theme.font.size.large,
       marginBottom: theme.spacing.md,
     },
@@ -37,7 +37,7 @@ export const homeParagraph = style({
   textAlign: 'center',
 
   '@media': {
-    [mediaQueries.below.tablet]: {
+    [mediaQueries.sm]: {
       fontSize: theme.font.size.small,
       marginBottom: theme.spacing.sm,
       textAlign: 'left',
@@ -55,7 +55,7 @@ export const featureCard = style({
   textAlign: 'center',
 
   '@media': {
-    [mediaQueries.below.tablet]: {
+    [mediaQueries.sm]: {
       padding: theme.spacing.md,
       marginTop: theme.spacing.lg,
       textAlign: 'left',
@@ -70,7 +70,7 @@ export const featureTitle = style({
   marginBottom: theme.spacing.md,
 
   '@media': {
-    [mediaQueries.below.tablet]: {
+    [mediaQueries.sm]: {
       fontSize: theme.font.size.medium,
       marginBottom: theme.spacing.sm,
     },
@@ -82,7 +82,7 @@ export const featureDescription = style({
   lineHeight: 1.5,
 
   '@media': {
-    [mediaQueries.below.tablet]: {
+    [mediaQueries.sm]: {
       fontSize: theme.font.size.small,
     },
   },
