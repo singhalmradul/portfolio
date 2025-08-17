@@ -1,10 +1,27 @@
 import { style } from '@vanilla-extract/css';
+import { globalStyle } from '@vanilla-extract/css';
 import { theme } from '../../themes/theme.css';
 import { mediaQueries } from '../../themes/media';
 
 export const skillsSection = style({
   padding: '5rem 1.5rem',
   backgroundColor: theme.color.background,
+  position: 'relative',
+  background: `
+    ${theme.color.background},
+    radial-gradient(circle at 10% 20%, ${theme.color.accent}04 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, ${theme.color.primary}06 0%, transparent 50%),
+    linear-gradient(135deg, ${theme.color.surface}20 0%, transparent 100%)
+  `,
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '1px',
+    background: `linear-gradient(90deg, transparent, ${theme.color.borderLight}, transparent)`,
+  },
   '@media': {
     [mediaQueries.xs]: {
       padding: '3rem 1rem'
@@ -99,28 +116,67 @@ export const skillsGrid = style({
 });
 
 export const skillCard = style({
-  padding: '0.75rem 1rem',
-  backgroundColor: theme.color.surface,
-  borderRadius: '0.5rem',
-  boxShadow: `0 2px 4px -1px ${theme.color.shadow}`,
-  border: `1px solid ${theme.color.border}`,
-  transition: 'all 0.2s',
-  fontSize: '0.875rem',
-  fontWeight: '500',
+  padding: '1rem 1.25rem',
+  backgroundColor: theme.color.surfaceElevated,
+  borderRadius: theme.borderRadius.medium,
+  boxShadow: `${theme.shadow.sm}, 0 1px 3px ${theme.color.shadow}`,
+  border: `1px solid ${theme.color.borderLight}`,
+  transition: `all ${theme.animation.duration.normal} ${theme.animation.easing.easeOut}`,
+  fontSize: '0.9rem',
+  fontWeight: theme.font.weight.medium,
   color: theme.color.text.secondary,
+  cursor: 'pointer',
+  position: 'relative',
+  overflow: 'hidden',
+  backdropFilter: 'blur(5px)',
   ':hover': {
-    boxShadow: `0 4px 8px -2px ${theme.color.shadow}`,
-    transform: 'translateY(-1px)',
-    borderColor: theme.color.primary
+    boxShadow: `${theme.shadow.lg}, 0 0 25px ${theme.color.primary}20, 0 8px 25px ${theme.color.shadow}`,
+    transform: 'translateY(-6px) scale(1.03)',
+    borderColor: theme.color.primary,
+    color: theme.color.primary,
+    backgroundColor: theme.color.background,
+  },
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: '-100%',
+    width: '100%',
+    height: '3px',
+    background: `linear-gradient(90deg, ${theme.color.primary}, ${theme.color.secondary}, ${theme.color.accent})`,
+    transition: `left ${theme.animation.duration.slower} ${theme.animation.easing.easeOut}`,
+  },
+  '::after': {
+    content: '""',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '0',
+    height: '0',
+    background: `radial-gradient(circle, ${theme.color.primary}08 0%, ${theme.color.accent}05 50%, transparent 70%)`,
+    borderRadius: '50%',
+    transition: `all ${theme.animation.duration.slow} ${theme.animation.easing.easeOut}`,
+    pointerEvents: 'none',
   },
   '@media': {
     [mediaQueries.xs]: {
-      padding: '0.6rem 0.8rem',
-      fontSize: '0.8rem'
+      padding: '0.75rem 1rem',
+      fontSize: '0.85rem'
     },
     [mediaQueries.lgUp]: {
-      padding: '0.875rem 1.125rem',
-      fontSize: '0.9rem'
+      padding: '1.125rem 1.5rem',
+      fontSize: '0.95rem'
     }
   }
+});
+
+// Global styles for hover effects on pseudo-elements
+globalStyle(`${skillCard}:hover::before`, {
+  left: 0,
+});
+
+globalStyle(`${skillCard}:hover::after`, {
+  width: '300%',
+  height: '300%',
 });

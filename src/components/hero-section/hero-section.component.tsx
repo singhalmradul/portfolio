@@ -1,12 +1,16 @@
 import { usePortfolioData } from '../../store/portfolio/use-portfolio';
-import { heroSection, heroTitle, heroDescription, heroButtons, heroButton, heroButtonSecondary } from './hero-section.css';
+import HeroActionButtons from './hero-action-buttons/hero-action-buttons.component';
+import { heroSection, heroTitle, heroDescription } from './hero-section.css';
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onScrollToProjects?: () => void;
+}
+
+const HeroSection = ({ onScrollToProjects }: HeroSectionProps) => {
   const { personalInfo } = usePortfolioData();
 
   const scrollToProjects = () => {
-    const projectsSection = document.getElementById('projects');
-    projectsSection?.scrollIntoView({ behavior: 'smooth' });
+    onScrollToProjects?.();
   };
 
   return (
@@ -15,14 +19,10 @@ const HeroSection = () => {
       <p className={heroDescription}>
         {personalInfo.description}
       </p>
-      <div className={heroButtons}>
-        <button onClick={scrollToProjects} className={heroButton}>
-          View My Work
-        </button>
-        <a href={personalInfo.resumeUrl} className={heroButtonSecondary} download>
-          Download Resume
-        </a>
-      </div>
+      <HeroActionButtons
+        resumeUrl={personalInfo.resumeUrl}
+        onViewWork={scrollToProjects}
+      />
     </section>
   );
 };

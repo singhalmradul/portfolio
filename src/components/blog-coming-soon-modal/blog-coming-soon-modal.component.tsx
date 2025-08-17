@@ -18,7 +18,6 @@ interface BlogComingSoonModalProps {
   title: string;
   description: string;
   upcomingTopics: BlogTopic[];
-  comingSoonMessage: string;
 }
 
 const BlogComingSoonModal = ({
@@ -26,8 +25,7 @@ const BlogComingSoonModal = ({
   onClose,
   title,
   description,
-  upcomingTopics,
-  comingSoonMessage
+  upcomingTopics
 }: BlogComingSoonModalProps) => {
   // Handle escape key to close modal
   useEffect(() => {
@@ -72,14 +70,14 @@ const BlogComingSoonModal = ({
             <strong>Upcoming topics include:</strong>
           </p>
           <ul className={modalList}>
-            {upcomingTopics.map((topic) => (
-              <li key={topic.id} className={modalListItem}>
+            {upcomingTopics.map((topic, index) => (
+              <li key={`${topic.title}-${index}`} className={modalListItem}>
                 {topic.emoji} {topic.title}
               </li>
             ))}
           </ul>
           <p className={modalFooter}>
-            {comingSoonMessage}
+            Stay tuned for technical insights, tutorials, and industry perspectives!
           </p>
         </div>
       </div>

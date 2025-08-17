@@ -1,12 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import {
-  personalInfo,
-  experience,
-  skills,
-  projects,
-  blog
-} from '../../data/portfolio.data';
 import type {
   PersonalInfo,
   Experience,
@@ -22,16 +15,34 @@ export interface PortfolioState {
   projects: Project[];
   blog: BlogData;
   isLoading: boolean;
+  loadingMessage: string;
   error: string | null;
 }
 
 const initialState: PortfolioState = {
-  personalInfo,
-  experience,
-  skills,
-  projects,
-  blog,
+  personalInfo: {
+    name: '',
+    title: '',
+    description: '',
+    about: '',
+    email: '',
+    linkedin: '',
+    github: '',
+    blogUrl: '',
+    resumeUrl: ''
+  },
+  experience: [],
+  skills: [],
+  projects: [],
+  blog: {
+    isComingSoon: true,
+    title: '',
+    description: '',
+    upcomingTopics: [],
+    posts: []
+  },
   isLoading: false,
+  loadingMessage: '',
   error: null,
 };
 
@@ -42,6 +53,9 @@ const portfolioSlice = createSlice({
     // Data loading states
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
+    },
+    setLoadingMessage: (state, action: PayloadAction<string>) => {
+      state.loadingMessage = action.payload;
     },
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
@@ -61,8 +75,8 @@ const portfolioSlice = createSlice({
     },
 
     // Skills updates
-    updateSkills: (state, action: PayloadAction<Partial<Skills>>) => {
-      state.skills = { ...state.skills, ...action.payload };
+    updateSkills: (state, action: PayloadAction<Skills>) => {
+      state.skills = action.payload;
     },
 
     // Projects updates
@@ -71,12 +85,6 @@ const portfolioSlice = createSlice({
     },
     addProject: (state, action: PayloadAction<Project>) => {
       state.projects.unshift(action.payload);
-    },
-    toggleProjectFeatured: (state, action: PayloadAction<number>) => {
-      const project = state.projects.find((p: Project) => p.id === action.payload);
-      if (project) {
-        project.isFeatured = !project.isFeatured;
-      }
     },
 
     // Blog updates
@@ -91,7 +99,7 @@ const portfolioSlice = createSlice({
     requestPortfolioData: () => {
       // This will be handled by saga for future API calls
     },
-    requestUpdatePersonalInfo: (_state, _action: PayloadAction<Partial<PersonalInfo>>) => {
+    requestUpdatePersonalInfo: () => {
       // This will be handled by saga for future API calls
     },
   },
@@ -99,6 +107,7 @@ const portfolioSlice = createSlice({
 
 export const {
   setLoading,
+  setLoadingMessage,
   setError,
   updatePersonalInfo,
   updateExperience,
@@ -106,7 +115,6 @@ export const {
   updateSkills,
   updateProjects,
   addProject,
-  toggleProjectFeatured,
   updateBlog,
   toggleBlogComingSoon,
   requestPortfolioData,

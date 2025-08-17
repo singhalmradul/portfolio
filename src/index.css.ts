@@ -1,6 +1,8 @@
 import { globalStyle } from '@vanilla-extract/css';
 import { theme } from './themes/theme.css';
 import { mediaQueries } from './themes/media';
+import './themes/animations.css';
+import './themes/utilities.css';
 
 globalStyle('*', {
   margin: 0,
@@ -27,13 +29,14 @@ globalStyle('html', {
 globalStyle('body', {
   fontFamily: theme.font.family.primary,
   fontSize: theme.font.size.medium,
-  lineHeight: 1.5,
+  lineHeight: 1.6,
   color: theme.color.text.primary,
   backgroundColor: theme.color.background,
   minHeight: '100vh',
   WebkitFontSmoothing: 'antialiased',
   MozOsxFontSmoothing: 'grayscale',
   overflowX: 'hidden',
+  transition: 'background-color 0.3s ease, color 0.3s ease',
 });
 
 globalStyle('#root', {
@@ -45,14 +48,21 @@ globalStyle('#root', {
 // Improve link accessibility and touch targets
 globalStyle('a', {
   color: theme.color.primary,
-  textDecoration: 'underline',
+  textDecoration: 'none',
   minHeight: '44px',
   display: 'inline-flex',
   alignItems: 'center',
+  transition: 'color 0.2s ease',
 });
 
-globalStyle('a:hover', {
-  textDecoration: 'none',
+// Only apply underline to text links, not card-style links or buttons
+globalStyle('a:hover:not([data-no-underline]):not([class*="Button"]):not([class*="button"]):not([class*="Card"]):not([class*="card"])', {
+  textDecoration: 'underline',
+});
+
+// Ensure card-style links never get underlined
+globalStyle('a[data-no-underline], a[data-no-underline]:hover', {
+  textDecoration: 'none !important',
 });
 
 globalStyle('a:focus-visible', {

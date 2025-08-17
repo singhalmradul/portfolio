@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './store/store'
 import ThemeInitializer from './components/theme-initializer/theme-initializer.component'
+import PortfolioInitializer from './components/portfolio-initializer/portfolio-initializer.component'
 import './index.css'
 import App from './app.component'
 
@@ -11,6 +12,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
       <ThemeInitializer />
+      <PortfolioInitializer />
       <BrowserRouter>
         <App />
       </BrowserRouter>

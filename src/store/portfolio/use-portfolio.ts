@@ -5,11 +5,11 @@ import {
   selectExperience,
   selectSkills,
   selectProjects,
-  selectFeaturedProjects,
   selectBlog,
   selectBlogPosts,
   selectUpcomingBlogTopics,
   selectPortfolioLoading,
+  selectPortfolioLoadingMessage,
   selectPortfolioError,
   selectAllTechnologies,
   selectContactInfo,
@@ -21,11 +21,12 @@ import {
   updateSkills,
   updateProjects,
   addProject,
-  toggleProjectFeatured,
   updateBlog,
   toggleBlogComingSoon,
   setLoading,
+  setLoadingMessage,
   setError,
+  requestPortfolioData,
 } from './portfolio.slice';
 import type {
   PersonalInfo,
@@ -42,11 +43,11 @@ export const usePortfolioData = () => {
   const experience = useSelector(selectExperience);
   const skills = useSelector(selectSkills);
   const projects = useSelector(selectProjects);
-  const featuredProjects = useSelector(selectFeaturedProjects);
   const blog = useSelector(selectBlog);
   const blogPosts = useSelector(selectBlogPosts);
   const upcomingTopics = useSelector(selectUpcomingBlogTopics);
   const isLoading = useSelector(selectPortfolioLoading);
+  const loadingMessage = useSelector(selectPortfolioLoadingMessage);
   const error = useSelector(selectPortfolioError);
   const allTechnologies = useSelector(selectAllTechnologies);
   const contactInfo = useSelector(selectContactInfo);
@@ -63,7 +64,7 @@ export const usePortfolioData = () => {
     dispatch(addExperience(exp));
   };
 
-  const handleUpdateSkills = (skillData: Partial<Skills>) => {
+  const handleUpdateSkills = (skillData: Skills) => {
     dispatch(updateSkills(skillData));
   };
 
@@ -73,10 +74,6 @@ export const usePortfolioData = () => {
 
   const handleAddProject = (project: Project) => {
     dispatch(addProject(project));
-  };
-
-  const handleToggleProjectFeatured = (projectId: number) => {
-    dispatch(toggleProjectFeatured(projectId));
   };
 
   const handleUpdateBlog = (blogData: Partial<BlogData>) => {
@@ -91,8 +88,16 @@ export const usePortfolioData = () => {
     dispatch(setLoading(loading));
   };
 
+  const handleSetLoadingMessage = (message: string) => {
+    dispatch(setLoadingMessage(message));
+  };
+
   const handleSetError = (errorMessage: string | null) => {
     dispatch(setError(errorMessage));
+  };
+
+  const loadPortfolioData = () => {
+    dispatch(requestPortfolioData());
   };
 
   return {
@@ -101,7 +106,6 @@ export const usePortfolioData = () => {
     experience,
     skills,
     projects,
-    featuredProjects,
     blog,
     blogPosts,
     upcomingTopics,
@@ -110,6 +114,7 @@ export const usePortfolioData = () => {
 
     // State
     isLoading,
+    loadingMessage,
     error,
 
     // Actions
@@ -119,10 +124,11 @@ export const usePortfolioData = () => {
     updateSkills: handleUpdateSkills,
     updateProjects: handleUpdateProjects,
     addProject: handleAddProject,
-    toggleProjectFeatured: handleToggleProjectFeatured,
     updateBlog: handleUpdateBlog,
     toggleBlogComingSoon: handleToggleBlogComingSoon,
     setLoading: handleSetLoading,
+    setLoadingMessage: handleSetLoadingMessage,
     setError: handleSetError,
+    loadPortfolioData,
   };
 };

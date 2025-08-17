@@ -5,6 +5,22 @@ import { mediaQueries } from '../../themes/media';
 export const experienceSection = style({
   padding: '5rem 1.5rem',
   backgroundColor: theme.color.surface,
+  position: 'relative',
+  background: `
+    ${theme.color.surface},
+    linear-gradient(135deg, ${theme.color.background}40 0%, transparent 50%),
+    radial-gradient(circle at 15% 85%, ${theme.color.primary}03 0%, transparent 50%),
+    radial-gradient(circle at 85% 15%, ${theme.color.accent}04 0%, transparent 50%)
+  `,
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '1px',
+    background: `linear-gradient(90deg, transparent, ${theme.color.borderLight}, transparent)`,
+  },
   '@media': {
     [mediaQueries.xs]: {
       padding: '3rem 1rem'
@@ -54,17 +70,34 @@ export const experienceContainer = style({
 });
 
 export const experienceCard = style({
-  padding: '1.5rem',
+  padding: '2rem',
   backgroundColor: theme.color.background,
-  borderRadius: '1rem',
-  boxShadow: `0 4px 6px -1px ${theme.color.shadow}`,
+  borderRadius: theme.borderRadius.large,
+  boxShadow: theme.shadow.md,
   border: `1px solid ${theme.color.border}`,
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  position: 'relative',
+  ':hover': {
+    boxShadow: theme.shadow.xl,
+    transform: 'translateY(-4px)',
+    borderColor: theme.color.primary,
+  },
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    bottom: 0,
+    width: '4px',
+    background: `linear-gradient(180deg, ${theme.color.primary}, ${theme.color.accent})`,
+    borderRadius: `${theme.borderRadius.large} 0 0 ${theme.borderRadius.large}`,
+  },
   '@media': {
     [mediaQueries.xs]: {
-      padding: '1.25rem'
+      padding: '1.5rem'
     },
     [mediaQueries.lgUp]: {
-      padding: '2rem'
+      padding: '2.5rem'
     }
   }
 });

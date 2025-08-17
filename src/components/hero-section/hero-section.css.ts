@@ -8,74 +8,118 @@ export const heroSection = style({
   alignItems: 'center',
   justifyContent: 'center',
   textAlign: 'center',
-  padding: '3rem 1rem 5rem 1rem',
-  background: `linear-gradient(to right, ${theme.color.primary}, ${theme.color.accent})`,
+  padding: '4rem 1rem 6rem 1rem',
+  background: `linear-gradient(135deg, ${theme.color.primary} 0%, ${theme.color.secondary} 30%, ${theme.color.accent} 70%, ${theme.color.primaryHover} 100%)`,
   color: theme.color.text.inverse,
-  minHeight: '70vh',
+  minHeight: '100vh',
+  position: 'relative',
+  overflow: 'hidden',
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: `
+      radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 50% 10%, rgba(22, 163, 74, 0.1) 0%, transparent 70%),
+      radial-gradient(circle at 10% 80%, rgba(21, 128, 61, 0.12) 0%, transparent 70%),
+      radial-gradient(circle at 90% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 60%)
+    `,
+    pointerEvents: 'none',
+  },
+  '::after': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: `
+      linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.05) 30%, transparent 70%),
+      linear-gradient(-45deg, transparent 0%, rgba(255, 255, 255, 0.03) 50%, transparent 100%)
+    `,
+    pointerEvents: 'none',
+  },
   '@media': {
     [mediaQueries.xs]: {
-      padding: '2rem 0.75rem 3rem 0.75rem',
-      minHeight: '60vh'
+      padding: '3rem 1rem 4rem 1rem',
+      minHeight: '80vh'
     },
     [mediaQueries.sm]: {
-      padding: '2.5rem 1rem 4rem 1rem',
-      minHeight: '65vh'
+      padding: '3.5rem 1rem 5rem 1rem',
+      minHeight: '85vh'
     },
     [mediaQueries.lgUp]: {
-      padding: '4rem 1rem 6rem 1rem',
-      minHeight: '75vh'
+      padding: '5rem 1rem 7rem 1rem',
+      minHeight: '100vh'
     }
   }
 });
 
 export const heroTitle = style({
-  fontSize: '2rem',
-  fontWeight: 'bold',
-  marginBottom: '1rem',
+  fontSize: '2.5rem',
+  fontWeight: theme.font.weight.extrabold,
+  marginBottom: '1.5rem',
   lineHeight: 1.2,
+  position: 'relative',
+  zIndex: 1,
+  color: theme.color.text.inverse,
+  letterSpacing: '-0.02em',
+  textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
   '@media': {
     [mediaQueries.xs]: {
-      fontSize: '1.75rem'
+      fontSize: '2rem'
     },
     [mediaQueries.smUp]: {
-      fontSize: '2.5rem'
-    },
-    [mediaQueries.mdUp]: {
       fontSize: '3rem'
     },
-    [mediaQueries.lgUp]: {
+    [mediaQueries.mdUp]: {
       fontSize: '3.5rem'
     },
+    [mediaQueries.lgUp]: {
+      fontSize: '4rem'
+    },
     [mediaQueries.xlUp]: {
-      fontSize: '3.75rem'
+      fontSize: '4.5rem'
     }
   }
 });
 
 export const heroDescription = style({
-  fontSize: '1rem',
-  marginBottom: '1.5rem',
-  maxWidth: '32rem',
-  lineHeight: 1.6,
+  fontSize: '1.125rem',
+  marginBottom: '2.5rem',
+  maxWidth: '42rem',
+  lineHeight: 1.7,
+  position: 'relative',
+  zIndex: 1,
+  opacity: 0.95,
+  fontWeight: theme.font.weight.medium,
+  color: theme.color.text.inverse,
+  textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
+  padding: '0 1rem',
   '@media': {
     [mediaQueries.xs]: {
-      fontSize: '0.95rem',
-      maxWidth: '90%'
-    },
-    [mediaQueries.smUp]: {
-      fontSize: '1.125rem'
-    },
-    [mediaQueries.mdUp]: {
-      fontSize: '1.25rem',
+      fontSize: '1rem',
+      maxWidth: '90%',
       marginBottom: '2rem'
     },
-    [mediaQueries.lgUp]: {
+    [mediaQueries.smUp]: {
+      fontSize: '1.25rem'
+    },
+    [mediaQueries.mdUp]: {
       fontSize: '1.375rem',
-      maxWidth: '36rem'
+      marginBottom: '3rem'
+    },
+    [mediaQueries.lgUp]: {
+      fontSize: '1.5rem',
+      maxWidth: '48rem'
     },
     [mediaQueries.xlUp]: {
-      fontSize: '1.5rem',
-      maxWidth: '40rem'
+      fontSize: '1.625rem',
+      maxWidth: '52rem'
     }
   }
 });
@@ -99,71 +143,111 @@ export const heroButtons = style({
 });
 
 export const heroButton = style({
-  padding: '0.75rem 1.5rem',
-  backgroundColor: theme.color.background,
+  padding: '1rem 2rem',
+  backgroundColor: theme.color.surfaceElevated,
   color: theme.color.primary,
-  borderRadius: '1rem',
-  boxShadow: `0 4px 6px -1px ${theme.color.shadow}`,
-  fontWeight: '500',
+  borderRadius: theme.borderRadius.large,
+  boxShadow: theme.shadow.lg,
+  fontWeight: theme.font.weight.bold,
   textDecoration: 'none',
-  border: 'none',
+  border: `2px solid rgba(255, 255, 255, 0.3)`,
   cursor: 'pointer',
-  fontSize: '1rem',
-  transition: 'all 0.2s',
+  fontSize: '1.125rem',
+  transition: `all ${theme.animation.duration.normal} ${theme.animation.easing.easeOut}`,
   minWidth: 'fit-content',
+  position: 'relative',
+  zIndex: 1,
+  backdropFilter: 'blur(15px)',
+  overflow: 'hidden',
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: '-100%',
+    width: '100%',
+    height: '100%',
+    background: `linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)`,
+    transition: `left ${theme.animation.duration.slower} ${theme.animation.easing.easeOut}`,
+  },
   ':hover': {
-    boxShadow: `0 10px 15px -3px ${theme.color.shadow}`,
-    transform: 'translateY(-2px)'
+    boxShadow: `${theme.shadow.xl}, 0 0 20px ${theme.color.primary}40`,
+    transform: 'translateY(-6px) scale(1.05)',
+    backgroundColor: theme.color.background,
+    borderColor: 'rgba(255, 255, 255, 0.6)',
+  },
+  ':active': {
+    transform: 'translateY(-3px) scale(1.02)',
   },
   '@media': {
     [mediaQueries.xs]: {
-      padding: '0.875rem 2rem',
-      fontSize: '0.95rem',
+      padding: '0.875rem 1.75rem',
+      fontSize: '1rem',
       width: '90%',
-      maxWidth: '16rem'
+      maxWidth: '18rem'
     },
     [mediaQueries.smUp]: {
       width: 'auto'
     },
     [mediaQueries.lgUp]: {
-      padding: '1rem 2rem',
-      fontSize: '1.1rem'
+      padding: '1.125rem 2.5rem',
+      fontSize: '1.25rem'
     }
   }
 });
 
 export const heroButtonSecondary = style({
-  padding: '0.75rem 1.5rem',
-  border: `2px solid ${theme.color.text.inverse}`,
-  borderRadius: '1rem',
-  fontWeight: '500',
+  padding: '1rem 2rem',
+  border: `2px solid rgba(255, 255, 255, 0.4)`,
+  borderRadius: theme.borderRadius.large,
+  fontWeight: theme.font.weight.bold,
   textDecoration: 'none',
   color: theme.color.text.inverse,
-  backgroundColor: 'transparent',
-  fontSize: '1rem',
+  backgroundColor: 'rgba(255, 255, 255, 0.08)',
+  fontSize: '1.125rem',
   cursor: 'pointer',
-  transition: 'all 0.2s',
+  transition: `all ${theme.animation.duration.normal} ${theme.animation.easing.easeOut}`,
   minWidth: 'fit-content',
   display: 'inline-block',
   textAlign: 'center',
+  position: 'relative',
+  zIndex: 1,
+  backdropFilter: 'blur(15px)',
+  overflow: 'hidden',
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '0',
+    height: '0',
+    background: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: '50%',
+    transition: `all ${theme.animation.duration.slower} ${theme.animation.easing.easeOut}`,
+  },
   ':hover': {
-    backgroundColor: theme.color.background,
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
     color: theme.color.primary,
-    transform: 'translateY(-2px)'
+    transform: 'translateY(-6px) scale(1.05)',
+    borderColor: 'rgba(255, 255, 255, 0.9)',
+    boxShadow: `0 15px 35px rgba(0, 0, 0, 0.2)`,
+  },
+  ':active': {
+    transform: 'translateY(-3px) scale(1.02)',
   },
   '@media': {
     [mediaQueries.xs]: {
-      padding: '0.875rem 2rem',
-      fontSize: '0.95rem',
+      padding: '0.875rem 1.75rem',
+      fontSize: '1rem',
       width: '90%',
-      maxWidth: '16rem'
+      maxWidth: '18rem'
     },
     [mediaQueries.smUp]: {
       width: 'auto'
     },
     [mediaQueries.lgUp]: {
-      padding: '1rem 2rem',
-      fontSize: '1.1rem'
+      padding: '1.125rem 2.5rem',
+      fontSize: '1.25rem'
     }
   }
 });

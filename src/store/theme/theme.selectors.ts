@@ -1,10 +1,10 @@
-import { createSelector } from 'reselect';
+import { createSelector } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
 // Base selector for theme state
-const selectThemeState = ({ theme }: RootState) => theme;
+export const selectThemeState = ({ theme }: RootState) => theme;
 
-// Memoized selectors using Reselect
+// Memoized selectors
 export const selectTheme = createSelector(
   [selectThemeState],
   ({ currentTheme }) => currentTheme
@@ -14,9 +14,6 @@ export const selectIsSystemTheme = createSelector(
   [selectThemeState],
   ({ isSystemTheme }) => isSystemTheme
 );
-
-// Export the base selector as well
-export { selectThemeState };
 
 // Additional derived selectors
 export const selectIsDarkTheme = createSelector(

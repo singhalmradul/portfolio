@@ -1,40 +1,24 @@
 import { usePortfolioData } from '../../store/portfolio/use-portfolio';
+import SkillCategory from './skill-category/skill-category.component';
+import SectionHeader from '../shared/section-header/section-header.component';
 import {
   skillsSection,
-  skillsTitle,
-  skillsContainer,
-  skillsCategory,
-  skillsCategoryTitle,
-  skillsGrid,
-  skillCard
+  skillsContainer
 } from './skills-section.css';
 
 const SkillsSection = () => {
   const { skills } = usePortfolioData();
 
-  const skillCategories = [
-    { title: 'Backend', skills: skills.backend },
-    { title: 'Cloud & DevOps', skills: skills.cloud },
-    { title: 'Frontend', skills: skills.frontend },
-    { title: 'Databases', skills: skills.databases },
-    { title: 'Other', skills: skills.other }
-  ];
-
   return (
     <section id="skills" className={skillsSection}>
-      <h2 className={skillsTitle}>Skills</h2>
+      <SectionHeader>Skills</SectionHeader>
       <div className={skillsContainer}>
-        {skillCategories.map((category) => (
-          <div key={category.title} className={skillsCategory}>
-            <h3 className={skillsCategoryTitle}>{category.title}</h3>
-            <div className={skillsGrid}>
-              {category.skills.map((skill: string) => (
-                <div key={skill} className={skillCard}>
-                  {skill}
-                </div>
-              ))}
-            </div>
-          </div>
+        {skills.map((category) => (
+          <SkillCategory
+            key={category.title}
+            title={category.title}
+            skills={category.values}
+          />
         ))}
       </div>
     </section>

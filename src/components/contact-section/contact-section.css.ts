@@ -5,7 +5,22 @@ import { mediaQueries } from '../../themes/media';
 export const contactSection = style({
   padding: '5rem 1.5rem',
   textAlign: 'center',
-  backgroundColor: theme.color.background,
+  backgroundColor: theme.color.surface,
+  position: 'relative',
+  background: `
+    linear-gradient(135deg, ${theme.color.surface} 0%, ${theme.color.background} 100%),
+    radial-gradient(circle at 30% 30%, ${theme.color.primary}05 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, ${theme.color.accent}04 0%, transparent 50%)
+  `,
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '1px',
+    background: `linear-gradient(90deg, transparent, ${theme.color.primary}40, ${theme.color.accent}30, transparent)`,
+  },
   '@media': {
     [mediaQueries.xs]: {
       padding: '3rem 1rem'
@@ -75,18 +90,34 @@ export const contactButtons = style({
 });
 
 export const contactButton = style({
-  padding: '0.75rem 1.25rem',
-  backgroundColor: theme.color.primary,
+  padding: '1rem 2rem',
+  background: `linear-gradient(135deg, ${theme.color.primary} 0%, ${theme.color.secondary} 50%, ${theme.color.accent} 100%)`,
   color: theme.color.text.inverse,
-  borderRadius: '1rem',
-  boxShadow: `0 4px 6px -1px ${theme.color.shadow}`,
+  borderRadius: '1.25rem',
+  boxShadow: `0 8px 15px -3px ${theme.color.shadow}, 0 4px 6px -2px ${theme.color.shadow}, 0 0 0 1px ${theme.color.primary}20`,
   textDecoration: 'none',
-  transition: 'all 0.2s',
+  transition: `all ${theme.animation.duration.normal} ${theme.animation.easing.easeOut}`,
   minWidth: 'fit-content',
   display: 'inline-block',
+  position: 'relative',
+  overflow: 'hidden',
+  fontWeight: theme.font.weight.semibold,
+  backdropFilter: 'blur(10px)',
+  fontSize: '1rem',
   ':hover': {
-    boxShadow: `0 10px 15px -3px ${theme.color.shadow}`,
-    transform: 'translateY(-2px)'
+    boxShadow: `0 20px 35px -5px ${theme.color.shadow}, 0 8px 15px -3px ${theme.color.shadow}, 0 0 0 1px ${theme.color.primary}60`,
+    transform: 'translateY(-5px) scale(1.05)',
+  },
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: '-100%',
+    width: '100%',
+    height: '100%',
+    background: `linear-gradient(135deg, ${theme.color.secondary}, ${theme.color.accent})`,
+    transition: 'left 0.3s ease',
+    zIndex: -1,
   },
   '@media': {
     [mediaQueries.xs]: {
@@ -106,18 +137,35 @@ export const contactButton = style({
 
 export const contactButtonSecondary = style({
   padding: '0.75rem 1.25rem',
-  border: `1px solid ${theme.color.primary}`,
+  border: `2px solid ${theme.color.primary}`,
   color: theme.color.primary,
   backgroundColor: 'transparent',
   borderRadius: '1rem',
   textDecoration: 'none',
-  transition: 'all 0.2s',
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   minWidth: 'fit-content',
   display: 'inline-block',
+  position: 'relative',
+  overflow: 'hidden',
+  fontWeight: theme.font.weight.medium,
   ':hover': {
-    backgroundColor: theme.color.primary,
+    background: `linear-gradient(135deg, ${theme.color.primary}, ${theme.color.secondary})`,
     color: theme.color.text.inverse,
-    transform: 'translateY(-2px)'
+    transform: 'translateY(-3px) scale(1.02)',
+    borderColor: theme.color.secondary,
+    boxShadow: `0 8px 20px -5px ${theme.color.shadow}`,
+  },
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    width: 0,
+    height: 0,
+    background: `radial-gradient(circle, ${theme.color.primary}10 0%, transparent 70%)`,
+    transition: 'all 0.3s ease',
+    transform: 'translate(-50%, -50%)',
+    borderRadius: '50%',
   },
   '@media': {
     [mediaQueries.xs]: {

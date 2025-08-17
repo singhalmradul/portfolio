@@ -123,9 +123,15 @@ export const blogPlaceholderFooter = style({
 // Blog posts grid and cards
 export const blogPostsGrid = style({
   display: 'grid',
-  gap: '2rem',
+  gap: '2.5rem',
   gridTemplateColumns: '1fr',
   '@media': {
+    [mediaQueries.xs]: {
+      gap: '1.5rem'
+    },
+    [mediaQueries.sm]: {
+      gap: '2rem'
+    },
     [mediaQueries.mdUp]: {
       gridTemplateColumns: 'repeat(2, 1fr)'
     },
@@ -136,19 +142,35 @@ export const blogPostsGrid = style({
 });
 
 export const blogPostCard = style({
-  backgroundColor: theme.color.surface,
-  borderRadius: '0.75rem',
-  padding: '1.5rem',
+  backgroundColor: theme.color.background,
+  borderRadius: theme.borderRadius.large,
+  padding: '2rem',
   border: `1px solid ${theme.color.border}`,
-  transition: 'all 0.2s',
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   cursor: 'pointer',
-  textDecoration: 'none',
+  textDecoration: 'none !important',
   color: 'inherit',
   display: 'block',
+  boxShadow: theme.shadow.sm,
+  height: 'fit-content',
   ':hover': {
-    transform: 'translateY(-2px)',
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-    borderColor: theme.color.primary
+    transform: 'translateY(-4px)',
+    boxShadow: theme.shadow.lg,
+    borderColor: theme.color.primary,
+    textDecoration: 'none !important',
+  },
+  selectors: {
+    '&:hover': {
+      textDecoration: 'none !important',
+    }
+  },
+  '@media': {
+    [mediaQueries.xs]: {
+      padding: '1.5rem'
+    },
+    [mediaQueries.sm]: {
+      padding: '1.75rem'
+    }
   }
 });
 
@@ -156,50 +178,66 @@ export const blogPostMeta = style({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  marginBottom: '1rem',
+  marginBottom: '1.5rem',
+  gap: '1rem',
   '@media': {
     [mediaQueries.xs]: {
       flexDirection: 'column',
       alignItems: 'flex-start',
-      gap: '0.5rem'
+      gap: '0.75rem',
+      marginBottom: '1.25rem'
     }
   }
 });
 
 export const blogPostDate = style({
   color: theme.color.text.secondary,
-  fontSize: '0.875rem'
+  fontSize: '0.875rem',
+  fontWeight: '400',
+  '@media': {
+    [mediaQueries.xs]: {
+      fontSize: '0.8rem'
+    }
+  }
 });
 
 export const blogPostCategory = style({
   backgroundColor: theme.color.primary,
   color: theme.color.text.inverse,
-  padding: '0.25rem 0.75rem',
+  padding: '0.375rem 1rem',
   borderRadius: '9999px',
   fontSize: '0.75rem',
-  fontWeight: '500'
+  fontWeight: '500',
+  whiteSpace: 'nowrap',
+  '@media': {
+    [mediaQueries.xs]: {
+      padding: '0.25rem 0.75rem'
+    }
+  }
 });
 
 export const blogPostTitle = style({
   fontSize: '1.25rem',
   fontWeight: '600',
-  marginBottom: '0.75rem',
+  marginBottom: '1rem',
   color: theme.color.text.primary,
-  lineHeight: 1.3,
+  lineHeight: 1.4,
   '@media': {
     [mediaQueries.xs]: {
-      fontSize: '1.125rem'
+      fontSize: '1.125rem',
+      marginBottom: '0.875rem'
     }
   }
 });
 
 export const blogPostDescription = style({
   color: theme.color.text.secondary,
-  marginBottom: '1rem',
+  marginBottom: '1.5rem',
   lineHeight: 1.6,
   '@media': {
     [mediaQueries.xs]: {
-      fontSize: '0.95rem'
+      fontSize: '0.95rem',
+      marginBottom: '1.25rem'
     }
   }
 });
@@ -207,12 +245,14 @@ export const blogPostDescription = style({
 export const blogPostFooter = style({
   display: 'flex',
   justifyContent: 'space-between',
-  alignItems: 'center',
+  alignItems: 'flex-end',
+  gap: '1rem',
+  marginTop: 'auto',
   '@media': {
     [mediaQueries.xs]: {
       flexDirection: 'column',
       alignItems: 'flex-start',
-      gap: '0.75rem'
+      gap: '1rem'
     }
   }
 });
@@ -220,10 +260,10 @@ export const blogPostFooter = style({
 export const blogPostTags = style({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '0.5rem',
+  gap: '0.625rem',
   '@media': {
     [mediaQueries.xs]: {
-      gap: '0.375rem'
+      gap: '0.5rem'
     }
   }
 });
@@ -231,10 +271,16 @@ export const blogPostTags = style({
 export const blogPostTag = style({
   backgroundColor: theme.color.surface,
   color: theme.color.text.secondary,
-  padding: '0.25rem 0.5rem',
-  borderRadius: '0.25rem',
+  padding: '0.375rem 0.75rem',
+  borderRadius: '0.375rem',
   fontSize: '0.75rem',
-  fontWeight: '500'
+  fontWeight: '500',
+  border: `1px solid ${theme.color.border}`,
+  '@media': {
+    [mediaQueries.xs]: {
+      padding: '0.25rem 0.5rem'
+    }
+  }
 });
 
 export const blogPostReadTime = style({

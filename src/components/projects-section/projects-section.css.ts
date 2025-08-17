@@ -1,41 +1,91 @@
 import { style } from '@vanilla-extract/css';
+import { globalStyle } from '@vanilla-extract/css';
 import { theme } from '../../themes/theme.css';
 import { mediaQueries } from '../../themes/media';
 
 export const projectsSection = style({
-  padding: '5rem 1.5rem',
+  padding: '6rem 1.5rem',
   backgroundColor: theme.color.surface,
+  position: 'relative',
+  background: `
+    ${theme.color.surface},
+    radial-gradient(circle at 20% 20%, ${theme.color.primary}08 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, ${theme.color.accent}06 0%, transparent 50%)
+  `,
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '1px',
+    background: `linear-gradient(90deg, transparent, ${theme.color.primary}40, ${theme.color.accent}40, transparent)`,
+  },
+  '::after': {
+    content: '""',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: '1px',
+    background: `linear-gradient(90deg, transparent, ${theme.color.border}, transparent)`,
+  },
   '@media': {
     [mediaQueries.xs]: {
-      padding: '3rem 1rem'
+      padding: '4rem 1rem'
     },
     [mediaQueries.sm]: {
-      padding: '4rem 1.25rem'
+      padding: '5rem 1.25rem'
     },
     [mediaQueries.lgUp]: {
-      padding: '6rem 1.5rem'
+      padding: '8rem 1.5rem'
     }
   }
 });
 
 export const projectsTitle = style({
-  fontSize: '1.875rem',
-  fontWeight: 'bold',
-  marginBottom: '2.5rem',
+  fontSize: '2.5rem',
+  fontWeight: theme.font.weight.bold,
+  marginBottom: '3rem',
   textAlign: 'center',
   color: theme.color.text.primary,
+  position: 'relative',
+  '::after': {
+    content: '""',
+    position: 'absolute',
+    bottom: '-1rem',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    width: '100px',
+    height: '4px',
+    background: `linear-gradient(90deg, ${theme.color.primary}, ${theme.color.accent})`,
+    borderRadius: theme.borderRadius.full,
+    boxShadow: `0 0 20px ${theme.color.primary}40`,
+  },
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    bottom: '-0.75rem',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    width: '120px',
+    height: '6px',
+    background: `linear-gradient(90deg, ${theme.color.primary}20, ${theme.color.accent}20)`,
+    borderRadius: theme.borderRadius.full,
+    filter: 'blur(2px)',
+  },
   '@media': {
     [mediaQueries.xs]: {
-      fontSize: '1.5rem',
-      marginBottom: '1.5rem'
-    },
-    [mediaQueries.smUp]: {
-      fontSize: '1.75rem',
+      fontSize: '2rem',
       marginBottom: '2rem'
     },
+    [mediaQueries.smUp]: {
+      fontSize: '2.25rem',
+      marginBottom: '2.5rem'
+    },
     [mediaQueries.lgUp]: {
-      fontSize: '2rem',
-      marginBottom: '3rem'
+      fontSize: '2.75rem',
+      marginBottom: '3.5rem'
     }
   }
 });
@@ -61,14 +111,29 @@ export const projectsGrid = style({
 
 export const projectCard = style({
   padding: '1.5rem',
-  backgroundColor: theme.color.background,
-  borderRadius: '1rem',
-  boxShadow: `0 4px 6px -1px ${theme.color.shadow}`,
+  backgroundColor: theme.color.surfaceElevated,
+  borderRadius: '1.25rem',
+  boxShadow: `0 4px 6px -1px ${theme.color.shadow}, 0 2px 4px -1px ${theme.color.shadow}`,
   border: `1px solid ${theme.color.border}`,
-  transition: 'all 0.2s',
+  transition: `all ${theme.animation.duration.normal} ${theme.animation.easing.easeOut}`,
+  position: 'relative',
+  overflow: 'hidden',
+  backdropFilter: 'blur(10px)',
+  '::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: '2px',
+    background: `linear-gradient(90deg, ${theme.color.primary}, ${theme.color.accent})`,
+    opacity: 0,
+    transition: `opacity ${theme.animation.duration.normal} ${theme.animation.easing.easeOut}`,
+  },
   ':hover': {
-    boxShadow: `0 10px 15px -3px ${theme.color.shadow}`,
-    transform: 'translateY(-2px)'
+    boxShadow: `0 20px 25px -5px ${theme.color.shadow}, 0 10px 10px -5px ${theme.color.shadow}, 0 0 0 1px ${theme.color.primary}20`,
+    transform: 'translateY(-8px) scale(1.02)',
+    borderColor: theme.color.primary,
   },
   '@media': {
     [mediaQueries.xs]: {
@@ -78,6 +143,11 @@ export const projectCard = style({
       padding: '2rem'
     }
   }
+});
+
+// Global styles for project card hover effects
+globalStyle(`${projectCard}:hover::before`, {
+  opacity: 1,
 });
 
 export const projectTitle = style({

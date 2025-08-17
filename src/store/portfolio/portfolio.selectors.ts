@@ -26,14 +26,9 @@ export const selectProjects = createSelector(
   (portfolio) => portfolio.projects
 );
 
-export const selectFeaturedProjects = createSelector(
+export const selectProjectByTitle = (title: string) => createSelector(
   [selectProjects],
-  (projects) => projects.filter((project: Project) => project.isFeatured)
-);
-
-export const selectProjectById = (id: number) => createSelector(
-  [selectProjects],
-  (projects) => projects.find((project: Project) => project.id === id)
+  (projects) => projects.find((project: Project) => project.title === title)
 );
 
 export const selectBlog = createSelector(
@@ -57,6 +52,11 @@ export const selectPortfolioLoading = createSelector(
   (portfolio) => portfolio.isLoading
 );
 
+export const selectPortfolioLoadingMessage = createSelector(
+  [selectPortfolioState],
+  (portfolio) => portfolio.loadingMessage
+);
+
 export const selectPortfolioError = createSelector(
   [selectPortfolioState],
   (portfolio) => portfolio.error
@@ -67,14 +67,7 @@ export const selectAllTechnologies = createSelector(
   [selectProjects, selectSkills],
   (projects, skills) => {
     const projectTechs = projects.flatMap((project: Project) => project.technologies);
-    const skillTechs = [
-      ...skills.backend,
-      ...skills.cloud,
-      ...skills.frontend,
-      ...skills.databases,
-      ...skills.tools,
-      ...skills.other
-    ];
+    const skillTechs = skills.flatMap(skillCategory => skillCategory.values);
 
     return Array.from(new Set([...projectTechs, ...skillTechs])).sort();
   }

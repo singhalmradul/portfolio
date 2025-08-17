@@ -1,13 +1,10 @@
 import { usePortfolioData } from '../../store/portfolio/use-portfolio';
 import type { Experience } from '../../data/portfolio.types';
+import ExperienceCard from './experience-card/experience-card.component';
+import SectionHeader from '../shared/section-header/section-header.component';
 import {
   experienceSection,
-  experienceTitle,
-  experienceContainer,
-  experienceCard,
-  experienceJobTitle,
-  experienceDuration,
-  experienceList
+  experienceContainer
 } from './experience-section.css';
 
 const ExperienceSection = () => {
@@ -15,18 +12,10 @@ const ExperienceSection = () => {
 
   return (
     <section id="experience" className={experienceSection}>
-      <h2 className={experienceTitle}>Experience</h2>
+      <SectionHeader>Experience</SectionHeader>
       <div className={experienceContainer}>
-        {experience.map((job: Experience) => (
-          <div key={job.id} className={experienceCard}>
-            <h3 className={experienceJobTitle}>{job.title} – {job.company}</h3>
-            <p className={experienceDuration}>{job.duration}</p>
-            <ul className={experienceList}>
-              {job.responsibilities.map((responsibility: string, index: number) => (
-                <li key={index}>{responsibility}</li>
-              ))}
-            </ul>
-          </div>
+        {experience.map((job: Experience, index: number) => (
+          <ExperienceCard key={`${job.company}-${index}`} experience={job} />
         ))}
       </div>
     </section>
