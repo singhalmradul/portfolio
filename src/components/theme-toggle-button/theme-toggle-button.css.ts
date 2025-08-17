@@ -15,6 +15,7 @@ export const themeToggle = style({
   transition: `all ${theme.animation.duration.normal} ${theme.animation.easing.easeOut}`,
   display: 'flex',
   alignItems: 'center',
+  justifyContent: 'center',
   gap: theme.spacing.sm,
   whiteSpace: 'nowrap',
   position: 'relative',
@@ -24,14 +25,32 @@ export const themeToggle = style({
 
   '@media': {
     [mediaQueries.xs]: {
-      padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
-      fontSize: theme.font.size.small,
-      gap: theme.spacing.xs,
-      minWidth: 'auto',
+      // Minimal mobile styling for very small screens
+      background: 'none',
+      border: 'none',
+      borderRadius: '50%',
+      padding: '0.5rem',
+      fontSize: '1.25rem',
+      gap: 0,
+      minWidth: '2.5rem',
+      height: '2.5rem',
+      width: '2.5rem',
+      boxShadow: 'none',
+      backdropFilter: 'none',
     },
     [mediaQueries.sm]: {
-      padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
-      fontSize: theme.font.size.small,
+      // Clean mobile styling for larger mobile devices
+      background: 'none',
+      border: `1px solid ${theme.color.borderLight}`,
+      borderRadius: theme.borderRadius.medium,
+      padding: '0.5rem',
+      fontSize: '1.125rem',
+      gap: 0,
+      minWidth: '2.75rem',
+      height: '2.75rem',
+      width: '2.75rem',
+      boxShadow: 'none',
+      backdropFilter: 'none',
     },
   },
 
@@ -61,6 +80,45 @@ export const themeToggle = style({
   },
 });
 
+// Mobile-specific hover styles
+globalStyle(`${themeToggle}:hover`, {
+  '@media': {
+    [mediaQueries.xs]: {
+      backgroundColor: `${theme.color.primary}10 !important`,
+      borderColor: 'transparent !important',
+      boxShadow: 'none !important',
+      transform: 'scale(1.05) !important',
+    },
+    [mediaQueries.sm]: {
+      backgroundColor: `${theme.color.primary}10 !important`,
+      borderColor: `${theme.color.primary} !important`,
+      boxShadow: 'none !important',
+      transform: 'scale(1.05) !important',
+    },
+  },
+});
+
+globalStyle(`${themeToggle}:focus`, {
+  '@media': {
+    [mediaQueries.xs]: {
+      borderColor: `${theme.color.primary} !important`,
+      boxShadow: `0 0 0 2px ${theme.color.primary}30 !important`,
+    },
+    [mediaQueries.sm]: {
+      borderColor: `${theme.color.primary} !important`,
+      boxShadow: `0 0 0 2px ${theme.color.primary}30 !important`,
+    },
+  },
+});
+
+globalStyle(`${themeToggle}::before`, {
+  '@media': {
+    [mediaQueries.sm]: {
+      display: 'none !important',
+    },
+  },
+});
+
 export const themeIcon = style({
   fontSize: '18px',
   lineHeight: 1,
@@ -77,8 +135,8 @@ export const themeIcon = style({
 
 export const themeText = style({
   '@media': {
-    [mediaQueries.xs]: {
-      display: 'none', // Hide text on very small screens
+    [mediaQueries.sm]: {
+      display: 'none', // Hide text on mobile and tablet
     },
   },
 });

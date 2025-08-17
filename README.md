@@ -1,69 +1,182 @@
-# React + TypeScript + Vite
+# Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. paste your resume in the `public` directory
 
-Currently, two official plugins are available:
+2. create YAML file in `public` directory
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  ```bash
+  touch public/portfolio.data.yaml
+  ```
 
-## Expanding the ESLint configuration
+3. fill in your details in the YAML file
+  ```yaml
+  personalInfo:
+    name: Mradul Singhal
+    title: Software Engineer
+    description: Software Engineer skilled in designing scalable microservices with Spring Boot, Scala, and AWS, experienced in event-driven architectures and distributed systems.
+    about: Software Engineer skilled in designing scalable microservices with Spring Boot, Scala, and AWS, experienced in event-driven architectures and distributed systems. Proven track record in cost optimisation, system performance improvement, and mentoring, with hands-on expertise in cloud computing, system design, and developing highly configurable applications.
+    email: singhalmradul@gmail.com
+    linkedin: https://www.linkedin.com/in/singhalmradul
+    github: https://github.com/singhalmradul
+    resumeUrl: /resume-singhalmradul.pdf
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+  experience:
+    - title: Software Engineer
+      company: MicroStrategy
+      duration: Nov 2024 – Present
+      responsibilities:
+        - Optimised resource handling by stopping unused EC2 instances, leading to a 45% cost reduction for dev and qa environments
+        - Reduced testing time by 75% by implementing checkpoint logic using Aspect-Oriented Programming (AOP) to track the progress of AMI creation, allowing for resuming from the last developer's desired step in case of testing multiple functionalities
+        - Refactored legacy code to improve maintainability, promoting loose coupling and reducing technical debt, resulting in streamlined development
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+    - title: Software Engineer Intern
+      company: NxtPe
+      duration: May 2024 – Sep 2024
+      responsibilities:
+        - Replaced Amazon API Gateway with a custom Spring Cloud Gateway, reducing cost by 90% and enabling customisability
+        - Handled request/response/URL transformations using Freemarker templates, enhancing flexibility in data presentation
+        - Improved system resilience by implementing Circuit Breaker pattern using Resilience4j
+        - Integrated 3rd party APIs following REST principles, ensuring efficient and reliable data retrieval
+        - Configured Keycloak for user and 3rd party authentication and authorisation, ensuring secure access to resources
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+    - title: Technical Instructor (Part-Time)
+      company: Crust to Core
+      duration: Jan 2023 – Jan 2024
+      responsibilities:
+        - Conducted live sessions on Java, Spring Boot fundamentals, Data Structures and Algorithms, and Object-oriented Programming
+        - Designed project-based learning modules for backend development, which increased student project completion rates
+        - Mentored over 50 students, enhancing their understanding of complex concepts and problem-solving skills
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+  projects:
+    - title: Comet – QA Automation Engine
+      description: A comprehensive automation engine for Quality Engineers using Spring Boot, React, and Fargate, streamlining MicroStrategy environment testing and reducing manual effort by 90%.
+      longDescription: Built an automation engine for Quality Engineers using Spring Boot, React, and Fargate, streamlining MicroStrategy environment testing and reducing manual effort by 90%. Designed a custom Domain Specific Language (DSL) with Scala infix notation, enabling Quality Engineers to define test cases in a simplified, readable format. Utilised Fargate to execute tests in isolated, language- and framework-agnostic environments. Developed an intuitive interface for configuring, executing, and viewing test results via MicroStrategy Library.
+      technologies:
+        - Spring Boot
+        - React
+        - Scala DSL
+        - AWS Fargate
+        - Docker
+      features:
+        - Custom DSL with Scala infix notation for simplified test case definitions
+        - Framework-agnostic execution engine with AWS Fargate
+        - Isolated test environments for language and framework independence
+        - Intuitive interface for configuring, executing, and viewing test results
+        - Integration with MicroStrategy Library for seamless workflow
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+    - title: HiV - Social Platform
+      description: Developed using React.js, supported by Spring Cloud microservices with REST communication. Implemented OAuth2 and OpenID Connect for secure authentication.
+      longDescription: Developed using React.js, supported by Spring Cloud microservices with REST communication. Implemented OAuth2 and OpenID Connect for secure authentication and leveraged PostgreSQL, MongoDB, Apache Cassandra, and Neo4j based on their respective strengths.
+      githubLink: https://www.github.com/singhalmradul/high-five
+      technologies:
+        - React.js
+        - Spring Cloud
+        - OAuth2
+        - OpenID Connect
+        - PostgreSQL
+        - MongoDB
+        - Apache Cassandra
+        - Neo4j
+      features:
+        - Microservices architecture with Spring Cloud
+        - OAuth2 and OpenID Connect authentication
+        - Multi-database approach using different databases for their strengths
+        - REST API communication between services
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+  skills:
+    - title: Backend
+      values:
+        - Java
+        - Scala
+        - Spring Boot
+        - Spring MVC
+        - Spring Data JPA
+        - Hibernate
+    - title: Cloud
+      values:
+        - AWS
+        - Terraform
+        - Docker
+        - Kubernetes
+        - Jenkins
+    - title: Frontend
+      values:
+        - React.js
+        - Redux Saga
+        - TypeScript
+    - title: Databases
+      values:
+        - PostgreSQL
+        - MongoDB
+        - Apache Cassandra
+        - Neo4j
+        - Redis
+        - MySQL
+    - title: Tools & Frameworks
+      values:
+        - JUnit
+        - Mockito
+        - Freemarker Template
+        - Swagger
+    - title: Other
+      values:
+        - REST APIs
+        - Microservices
+        - Kafka
+        - RabbitMQ
+        - Scripting
+        - Python
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+  blog:
+    upcomingTopics:
+      - title: Building scalable microservices with Spring Boot and Kafka
+        emoji: 🏗️
+        category: Architecture
+
+      - title: Event-driven architecture patterns and best practices
+        emoji: 🔄
+        category: Architecture
+
+      - title: AWS cost optimization strategies for startups
+        emoji: ☁️
+        category: Cloud
+
+      - title: CI/CD pipeline optimization and deployment strategies
+        emoji: 🚀
+        category: DevOps
+
+      - title: Monitoring and observability in distributed systems
+        emoji: 📊
+        category: Monitoring
+
+      - title: Performance tuning and optimization techniques
+        emoji: 🔧
+        category: Performance
+
+    posts:
+      - title: Processes and Threads
+        description: A comprehensive guide to understanding processes and threads, their differences, and how they work in modern operating systems.
+        content: Deep dive into the fundamental concepts of processes and threads, exploring their characteristics, differences, and practical applications in software development.
+        date: 2025-01-01
+        category: System Programming
+        tags:
+          - Processes
+          - Threads
+          - Operating Systems
+          - Concurrency
+        readTime: 8
+        url: https://medium.com/@singhalmradul/processes-and-threads-b7ef7e0e4dd3
+  ```
+4. install dependencies
+  ```bash
+  pnpm install
+  ```
+
+5. test your application by running it locally
+  ```bash
+  pnpm dev
+  ```
+6. build your application for production
+  ```bash
+  pnpm build
+  ```

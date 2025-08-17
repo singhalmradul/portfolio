@@ -27,7 +27,7 @@ const BlogSection = () => {
 
   return (
     <section id="blog" className={blogSection}>
-      <SectionHeader>{blog.title}</SectionHeader>
+      <SectionHeader>Blog & Writing</SectionHeader>
       <div className={blogContainer}>
         <div>
           {blogPosts.length > 0 ? (
